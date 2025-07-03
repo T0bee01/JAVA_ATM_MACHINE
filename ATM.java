@@ -6,7 +6,7 @@ public class ATM {
     private static Scanner input = new Scanner(System.in);
 
     public static void main(String[]args){
-        //method that loads the users from file
+        //method that loads the users from file000
         loadUsers();
         //welcome message to user
         System.out.println("Welcome to the best ATM!");
@@ -30,10 +30,10 @@ public class ATM {
                 String[] parts = fileScanner.nextLine().split(",");
                 //if statement to save each field to  the parts array
                 if(parts.length == 4){
-                    String name = parts[0];
-                    String accNo = parts[1];
-                    String pin = parts[2];
-                    double balance = Double.parseDouble(parts[3]);
+                    String name = parts[0].trim();
+                    String accNo = parts[1].trim();
+                    String pin = parts[2].trim();
+                    double balance = Double.parseDouble(parts[3].trim());
                     users.add(new User(name, accNo, pin, balance));
                 }
             }
@@ -47,7 +47,7 @@ public class ATM {
         //try-catch block to write the info to file and to throw an exception if unable to
         try(PrintWriter writer = new PrintWriter(FILE_NAME)){
             for(User user: users){
-                writer.println(user.getName() + ", " + user.getAccountNumber() + ", " + user.getPin() + ", " + user.getBalance());
+                writer.println(user.getName() + "," + user.getAccountNumber() + "," + user.getPin() + "," + user.getBalance());
             }
         }
         catch(Exception ex){
@@ -60,9 +60,9 @@ public class ATM {
         //while loop to ensure login is attempted correctly and if not  gives error message
         while(attempts < 3){
             System.out.println("Please enter Account Number: ");
-            String accNo = input.nextLine();
+            String accNo = input.nextLine().trim();
             System.out.println("please Enter PIN: ");
-            String pin = input.nextLine();
+            String pin = input.nextLine().trim();
             //for loop for successful login attempt
             for(User user: users){
                 if(user.getAccountNumber().equals(accNo) && user.getPin().equals(pin)){
